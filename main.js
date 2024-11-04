@@ -59,4 +59,19 @@ const displayTickets = (tickets) => {
     const ticketsHTML = tickets.map(ticket => createTicketHTML(ticket)).join('');
     ticketsContainer.innerHTML = ticketsHTML;
 };
-
+//finally
+const initTicketSystem = async () => {
+  
+    hideError();
+    showLoading();
+    
+    try {
+        const tickets = await fetchTickets();
+        displayTickets(tickets);
+    } catch (error) {
+        showError(error.message);
+    } finally {
+        hideLoading();
+    }
+};
+document.addEventListener('DOMContentLoaded', initTicketSystem);
