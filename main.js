@@ -43,3 +43,20 @@ const fetchTickets = async () => {
         throw new Error(`Failed to fetch tickets: ${error.message}`);
     }
 };
+const createTicketHTML = (ticket) => {
+    return `
+        <div class="ticket">
+            <div class="ticket-id">Ticket #${ticket.id}</div>
+            <div class="ticket-customer">Customer ID: ${ticket.userId}</div>
+            <h3 class="ticket-title">${ticket.title}</h3>
+            <p class="ticket-body">${ticket.body}</p>
+        </div>
+    `;
+};
+
+// Function to display tickets
+const displayTickets = (tickets) => {
+    const ticketsHTML = tickets.map(ticket => createTicketHTML(ticket)).join('');
+    ticketsContainer.innerHTML = ticketsHTML;
+};
+
